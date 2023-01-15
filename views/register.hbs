@@ -1,17 +1,19 @@
 <form method="post" action="/register">
-    <label>Username
-        <input type="text" name="username">
-    </label>
-    <label>Email
-        <input type="text" name="email">
-    </label>
-    <label>Password
-        <input type="password" name="password">
-    </label>
-    <label>Confirm password
-        <input type="password" name="confpass">
-    </label>
-    <input type="submit" value="Sign up">
+    <h1>Sign up</h1>
+    <div>
+        <input type="text" name="username" placeholder="Username">
+    </div>
+    <div>
+        <input type="text" name="email" placeholder="Email">
+    </div>
+    <div>
+        <input type="password" name="password" placeholder="Password">
+    </div>
+    <div>
+        <input type="password" name="confpass" placeholder="Confirm Password">
+    </div>
+    <input id="submit" type="submit" value="Sign up">
+    <a href="/login">Already have an account?</a>
 </form>
 
-<a href="/login">Already have an account?</a>
+
