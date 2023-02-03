@@ -20,8 +20,8 @@ module.exports = (req, res) => {
             };
             fetch('http://localhost:8080/register', {
                 method: 'POST',
-                headers: 'Content-type: application/json',
-                body: user.json()
+                headers: {'Content-type': 'application/json'},
+                body: user
             })
                 .then(resp => {
                     if (resp.status == 201) {

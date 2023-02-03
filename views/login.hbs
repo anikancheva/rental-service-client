@@ -1,12 +1,17 @@
-<form method="post" action="/login">
+<form id="loginForm" method="post" action="/login">
     <h1>Sign in</h1>
     <div>
-       <input type="text" name="email" placeholder="Email">
+        <input type="text" name="username" placeholder="Username">
     </div>
     <div>
         <input type="password" name="password" placeholder="Password">
     </div>
-    <input id="submit" type="submit" value="Sign in">
+
+    <div>
+        <p class="user-error" {{#unless error}}hidden="true"{{/unless}}>Invalid username or password!</p>
+    </div>
+
+    <input id="submitBtn" type="submit" value="Sign in">
     <a href="/register">Not registered yet?</a>
 </form>
-
+<script src="../static/js/validateLogin.js"></script>
