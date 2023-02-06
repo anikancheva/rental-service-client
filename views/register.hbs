@@ -1,19 +1,40 @@
 <form id="regForm" method="post" action="/register">
+    <div>
+        <p class="user-error" {{#unless error}}hidden="true" {{/unless}}>{{error}}</p>
+    </div>
     <h1>Sign up</h1>
+    <label>Username</label>
     <div>
-        <input type="text" name="username" placeholder="Username">
+        <input id="username" type="text" name="username">
     </div>
     <div>
-        <input type="text" name="email" placeholder="Email">
+        <p id="username-error" hidden="true">Username must be between 8 and 20 symbols!</p>
     </div>
+    <label>Email</label>
     <div>
-        <input type="password" name="password" placeholder="Password">
+        <input id="email" type="text" name="email">
     </div>
+    <label>First Name</label>
     <div>
-        <input type="password" name="confpass" placeholder="Confirm Password">
+        <input id="firstName" type="text" name="firstName">
+    </div>
+    <label>Last Name</label>
+    <div>
+        <input id="lastName" type="text" name="lastName">
+    </div>
+    <label>Phone Number</label>
+    <div>
+        <input id="phoneNo" type="text" name="phoneNo" placeholder="(###)###-####">
+    </div>
+    <label>Password</label>
+    <div>
+        <input id="password" type="password" name="password">
+    </div>
+    <label>Confirm Password</label>
+    <div>
+        <input id="confpass" type="password" name="confpass">
     </div>
     <input id="submitBtn" type="submit" value="Sign up">
     <a href="/login">Already have an account?</a>
 </form>
-
-
+<script src="../static/js/validateRegister.js"></script>

@@ -6,27 +6,29 @@ module.exports = (req, res) => {
         let username = req.body.username.trim();
         let password = req.body.password.trim();
 
-        let jwt = "";
+        let jwt;
         if (username.length > 0 && password.length > 0) {
             fetch('http://localhost:8080/login', {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({ username, password })
             }).then(resp => {
-                if (resp.status == 200) {
-                    res.render('home', { title: 'Home', user: username })
-                    return resp.text();
-                } else {
+                if (resp.status != 200) {
                     res.render('login', { error: true })
+                }else{
+                    return resp.text();
                 }
 
             }).then(data => {
                 console.log("token--->" + data)
                 jwt = data;
+                res.cookie('sessionId', jwt, {HttpOnly: true})
+                res.render('home', { title: 'Home', user: username})
+                    
             })
 
         } else {
-            // error
+            res.render('login', { error: true })
         }
 
 
