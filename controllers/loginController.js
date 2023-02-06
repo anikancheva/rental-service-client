@@ -1,6 +1,6 @@
 module.exports = (req, res) => {
     if (req.method == 'GET') {
-        res.render('login', { title: 'Login Page' })
+        res.render('login', { title: 'Login' })
     } else if (req.method == 'POST') {
 
         let username = req.body.username.trim();
@@ -15,16 +15,14 @@ module.exports = (req, res) => {
             }).then(resp => {
                 if (resp.status != 200) {
                     res.render('login', { error: true })
-                }else{
+                } else {
                     return resp.text();
-                }
-
+                }             
             }).then(data => {
-                console.log("token--->" + data)
                 jwt = data;
-                res.cookie('sessionId', jwt, {HttpOnly: true})
-                res.render('home', { title: 'Home', user: username})
-                    
+                res.cookie('sessionId', jwt, { httpOnly: true })
+                res.render('home', { title: 'Home', user: username })
+
             })
 
         } else {

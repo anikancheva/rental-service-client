@@ -1,6 +1,6 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
-
+const cookieParser = require('cookie-parser')
 const { body } = require('express-validator');
 const app = express();
 const port = 3000;
@@ -17,11 +17,15 @@ app.set('view engine', '.hbs');
 //middleware
 app.use('/static', express.static('./static'));
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.json());
 
 //routes
 //registration form input validation
 app.get('/', (req, res) => res.render('home', { title: 'Home Page' }));
+app.get('/about', (req, res) => res.render('about', { title: 'About' }));
+app.get('/listings', (req, res) => res.render('listings', { title: 'Listings' }));
+app.get('/create', (req, res) => res.render('create', { title: 'Create Listing' }));
 app.all('/login', login);
 app.get('/register', register.get);
 app.post('/register',
@@ -30,7 +34,11 @@ app.post('/register',
     body('lastName').notEmpty().withMessage("Invalid last name"),
     body('email').isEmail().withMessage("Invalid email"),
     body('phoneNo').isMobilePhone().withMessage("Invalid phone number"),
-    body('password').notEmpty().withMessage("Password empty"), register.post)
+    body('password').notEmpty().withMessage("Password empty"), register.post);
+app.get('/logout', (req, res) => {
+    res.clearCookie('sessionId');
+    res.render('home', { title: 'Home' })
+})
 
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
