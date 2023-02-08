@@ -1,1 +1,18 @@
-<h1>listings :)</h1>
+<div class="sidebar">
+    <p>What are you looking for?</p>
+    <a href="/listings/car">Cars</a>
+    <a href="/listings/truck">Trucks</a>
+    <a href="/listings/motorbike">Motorbikes</a>
+    <a href="/listings/rv">RVs</a>
+    <a href="/listings/boat">Boats</a>
+    <a href="/listings/exotic">Exotic</a>
+</div>
+<div class="listings-list">
+    <ul id="listings">
+        {{#each listings}}
+        <li>{{>listing}}</li>
+        {{else}}
+        <p>no listings found</p>
+        {{/each}}
+    </ul>
+</div>

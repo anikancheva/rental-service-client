@@ -5,8 +5,9 @@ const { body } = require('express-validator');
 const app = express();
 const port = 3000;
 
-const login = require('./controllers/loginController');
-const register = require('./controllers/registerController');
+const login = require('./controllers/login');
+const register = require('./controllers/register');
+const listingsRouter = require('./controllers/listings');
 
 //handlebars setup
 app.engine('.hbs', handlebars.create({
@@ -15,7 +16,7 @@ app.engine('.hbs', handlebars.create({
 app.set('view engine', '.hbs');
 
 //middleware
-app.use('/static', express.static('./static'));
+app.use('**/static', express.static('./static'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.json());
@@ -24,7 +25,7 @@ app.use(express.json());
 //registration form input validation
 app.get('/', (req, res) => res.render('home', { title: 'Home Page' }));
 app.get('/about', (req, res) => res.render('about', { title: 'About' }));
-app.get('/listings', (req, res) => res.render('listings', { title: 'Listings' }));
+app.use('/listings', listingsRouter);
 app.get('/create', (req, res) => res.render('create', { title: 'Create Listing' }));
 app.all('/login', login);
 app.get('/register', register.get);
