@@ -124,9 +124,16 @@ form p {
 
 .listings .list-item p {
     font-size: 16px;
-    margin: 5px 70px;
+    margin: 5px;
     
 }
+
+.listings .list-item a {
+    color: rgb(150, 216, 251);
+    text-decoration: none;
+}
+
+
 .sidebar {
     border: #181622 2px solid;
     border-radius: 6px;
@@ -164,5 +171,16 @@ form p {
     border: #181622 2px solid;   
     border-radius: 3px;
     background: rgb(24, 171, 251);
+}
+
+.createForm {
+    background-color: rgb(150, 216, 251);
+    font-weight: bold;
+    display: inline-flex;
+   
+}
+
+.createForm label{
+     font-size: 8pt;
 }
 

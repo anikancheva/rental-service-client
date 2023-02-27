@@ -26,7 +26,15 @@ app.use(express.json());
 app.get('/', (req, res) => res.render('home', { title: 'Home Page' }));
 app.get('/about', (req, res) => res.render('about', { title: 'About' }));
 app.use('/listings', listingsRouter);
-app.get('/create', (req, res) => res.render('create', { title: 'Create Listing' }));
+app.get('/create', (req, res) => {
+    let token = req.header('Cookie').split(' ')[1];
+    if (!token) {
+        res.render('login');
+    } else {
+        res.render('create', { title: 'Create Listing' })
+    }
+
+});
 app.all('/login', login);
 app.get('/register', register.get);
 app.post('/register',

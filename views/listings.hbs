@@ -8,12 +8,16 @@
         <a href="/listings/boat">Boats</a>
         <a href="/listings/exotic">Exotic</a>
     </div>
+    {{#if listings}}
     <ul>
         {{#each listings}}
         <li class="list-item">{{>listing}}</li>
-        {{else}}
-        <p>no listings found</p>
         {{/each}}
     </ul>
-
+    {{else}}
+    <div class="listing-details">
+    {{>listingDetails}}
+    </div>
+    {{/if}}
 </div>
+<script src="../static/js/listings.js"></script>

@@ -1,1 +1,32 @@
-<h1>create :)</h1>
+<form class="createForm" action="/listings" method="POST" enctype="multipart/form-data">
+    {{#if error}}
+    <p id="input-error">{{error}}</p>
+    {{/if}}
+    <label>Vehicle type:
+        <select name="type">
+            <option>CAR</option>
+            <option>TRUCK</option>
+            <option>MOTORBIKE</option>
+            <option>VAN</option>
+            <option>BOAT</option>
+        </select>
+    </label>
+
+    <label>Vehicle brand:<input type="text" name="brand"></label>
+
+    <label>Vehicle model:<input type="text" name="model"></label>
+
+    <label>Year:<input type="number" min="1990" max="2023" step="1" value="2016" name="year" /></label>
+
+    <label>Seats:<input type="number" min="1" max="10" step="1" value="5" name="seats"></label>
+
+    <label>Doors:<input type="number" min="0" max="5" step="1" value="5" name="doors"></label>
+
+    <label>Price:<input type="number" min="0" value="0" name="price"></label>
+
+    <label>Upload image:<input type="file" name="image"></label>
+
+
+    <input type="submit" value="Upload Listing">
+
+</form>
