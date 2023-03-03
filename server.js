@@ -8,6 +8,7 @@ const port = 3000;
 const login = require('./controllers/login');
 const register = require('./controllers/register');
 const listingsRouter = require('./controllers/listings');
+const reviewsRouter= require('./controllers/reviews');
 
 //handlebars setup
 app.engine('.hbs', handlebars.create({
@@ -23,18 +24,27 @@ app.use(express.json());
 
 //routes
 //registration form input validation
-app.get('/', (req, res) => res.render('home', { title: 'Home Page' }));
-app.get('/about', (req, res) => res.render('about', { title: 'About' }));
+app.use((req, res, next) => {
+    let token = req.header('Cookie').split(' ')[1];
+    if (token) {
+        req.user = true;
+    }
+    next();
+});
+app.get('/', (req, res) => {
+    res.render('home', { title: 'Home Page', user: req.user })
+});
+app.get('/about', (req, res) => res.render('about', { title: 'About', user: req.user  }));
 app.use('/listings', listingsRouter);
 app.get('/create', (req, res) => {
-    let token = req.header('Cookie').split(' ')[1];
-    if (!token) {
+    if (!req.user) {
         res.render('login');
     } else {
-        res.render('create', { title: 'Create Listing' })
+        res.render('create', { title: 'Create Listing', user: req.user })
     }
 
 });
+app.use('/reviews', reviewsRouter)
 app.all('/login', login);
 app.get('/register', register.get);
 app.post('/register',
@@ -46,6 +56,7 @@ app.post('/register',
     body('password').notEmpty().withMessage("Password empty"), register.post);
 app.get('/logout', (req, res) => {
     res.clearCookie('sessionId');
+    req.user=undefined;
     res.render('home', { title: 'Home' })
 })
 

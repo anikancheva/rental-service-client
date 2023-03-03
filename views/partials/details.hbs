@@ -1,0 +1,27 @@
+{{#with details}}
+<div class="list-item">
+    <img src="{{imageUrl}}" alt="details image" width="200">
+    <p>{{brand}} {{model}}</p>
+    <p>Seats: {{seats}}</p>
+    <p>Doors: {{doors}}</p>
+    <p>Year: {{year}}</p>
+    <p>${{price}}/day</p>
+</div>
+<p id="showReviews">Reviews</p>
+<div class="reviews">
+    {{#each reviews}}
+    <div class="review">
+        <p class="author">{{author}}:</p>
+        <p class="content">{{content}}</p>
+        <div class="votes">
+            <a href="/reviews/{{listingId}}/like/{{id}}"><img src="static/images/thumbs-up-icon.webp" alt="likes" width="18"></a>
+            <p>{{likes}}</p>
+            <a href="/reviews/{{listingId}}/dislike/{{id}}"><img src="static/images/thumbs-down-icon.png" alt="dislikes" width="16"></a>
+            <p>{{dislikes}}</p>
+        </div>
+
+    </div>
+    {{/each}}
+</div>
+
+{{/with}}

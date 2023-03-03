@@ -21,7 +21,7 @@ module.exports = (req, res) => {
             }).then(data => {
                 jwt = data;
                 res.cookie('sessionId', jwt, { httpOnly: true })
-                res.render('home', { title: 'Home', user: username })
+                res.redirect('/listings');
 
             })
 

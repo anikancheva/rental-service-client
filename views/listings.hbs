@@ -9,14 +9,20 @@
         <a href="/listings/exotic">Exotic</a>
     </div>
     {{#if listings}}
+    <div class="list">
     <ul>
         {{#each listings}}
-        <li class="list-item">{{>listing}}</li>
+        <li class="list-item">
+            <img src="{{imageUrl}}" alt="vehicle image" width="200px">
+            <p>{{brand}} {{model}}</p>
+            <p>${{price}}/day</p>
+            <a href="/listings/details/{{id}}">Details</a>
+        </li>
         {{/each}}
-    </ul>
+    </ul></div>
     {{else}}
-    <div class="listing-details">
-    {{>listingDetails}}
+    <div>
+        {{>details}}
     </div>
     {{/if}}
 </div>

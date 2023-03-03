@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const multer = require('multer');
 const storage = multer.diskStorage({
-    destination: 'static/images/',
+    destination: 'static/images/uploaded/',
     filename: (req, file, nameGen) => {
         let ext = file.mimetype.split('image/')[1];
         nameGen(null, file.fieldname + '-' + Math.round(Math.random() * 10000) + '.' + ext)
@@ -10,12 +10,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/:type?', async (req, res) => {
-    let token = req.header('Cookie').split(' ')[1];;
+    let token = req.header('Cookie').split(' ')[1];
     if (!token) {
         res.render('login');
     } else {
         let ctx = {
             title: 'Listings',
+            user: true,
             listings: await getAllListings(req.params.type, token.substring(10))
         }
         res.render('listings', ctx);
@@ -25,13 +26,14 @@ router.get('/:type?', async (req, res) => {
 })
 
 router.get('/details/:id', async (req, res) => {
-    let token = req.header('Cookie').split(' ')[1];;
+    let token = req.header('Cookie').split(' ')[1];
     if (!token) {
         res.render('login');
     } else {
         let ctx = {
             title: 'Listings',
-            listingDetails: await getOneListing(req.params.id, token.substring(10))
+            user: true,
+            details: await getOneListing(req.params.id, token.substring(10))
         }
         res.render('listings', ctx);
     }
